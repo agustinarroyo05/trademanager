@@ -1,0 +1,2 @@
+# trademanager
+TradeManagerTest
