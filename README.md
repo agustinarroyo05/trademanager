@@ -5,7 +5,7 @@ Open a terminal and change the directory to the specific location.
 
 Run:
 
-$go build main.go \n
+$go build main.go
 $./main
 
 After that you can open your browser at http://localhost:8080
