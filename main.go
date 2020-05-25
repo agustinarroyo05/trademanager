@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"testagile/services"
 	"github.com/gorilla/mux"
+	"strconv"
 )
 
 var tradingService = services.NewTradingService()
@@ -52,13 +53,18 @@ func createTransaction(w http.ResponseWriter, r *http.Request) {
 func getTransactionsById(w http.ResponseWriter, r *http.Request) {
 	pathParams := mux.Vars(r)
 	w.Header().Set("Content-Type", "application/json")
-	var err error
 	if val, ok := pathParams["id"]; ok {
-		if err != nil {
+		_, errNum := strconv.Atoi(val)
+		if errNum != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		json.NewEncoder(w).Encode(tradingService.GetTransaction(val))
+		tx, errTx:= (tradingService.GetTransaction(val))
+		if errTx != nil{
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+		json.NewEncoder(w).Encode(tx)
 	}
 }
 

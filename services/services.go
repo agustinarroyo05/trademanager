@@ -16,6 +16,7 @@ const (
 
 const (
 	INSUFICIENT_CREDIT int = 0
+	INVALID_TRANSACTION int = 1;
 )
 
 type Errors struct{
@@ -96,9 +97,14 @@ func (t TradingService) GetTransactionHistory() []Transaction {
 	return copyTransactionHistroy
 }
 
-func (t TradingService) GetTransaction(id string) *Transaction {
+func (t TradingService) GetTransaction(id string) (*Transaction, *Errors) {
+
 	t.mu.RLock()
-	tx := t.transactionHistory[id]
-	t.mu.RUnlock()
-	return &tx
+	defer t.mu.RUnlock()
+	if tx,ok := t.transactionHistory[id]; !ok {
+		var e Errors = Errors{INVALID_TRANSACTION, "Invalid transaction" }
+		return nil, &e
+	} else {
+		return &tx, nil
+	}
 }
