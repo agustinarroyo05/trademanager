@@ -10,7 +10,7 @@ $./main
 
 After that you can open your browser at http://localhost:8080
 This Url will show the transactions that you have.
-To create a new transaction, then go to the browser console and make a post request:
+To create a new transaction, go to the browser console and make a post request:
 
 fetch("transactiontrade/transactions/create",{
   method: "POST",
