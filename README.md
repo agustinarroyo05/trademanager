@@ -1,4 +1,4 @@
-Run Trading Manager:
+Run Trade Manager:
 
 Clone the project to an specific location: 
 Open a terminal and change the directory to the specific location.
